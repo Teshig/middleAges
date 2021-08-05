@@ -1,0 +1,138 @@
+[
+  {
+    "_id": {
+      "zoneId": "0001",
+      "roomId": "0000"
+    },
+    "title": "FirstRoom",
+    "description": "This is a special test room.",
+    "exits": [
+      {
+        "direction": "NORTH",
+        "exitTo": "00010001"
+      },
+      {
+        "direction": "WEST",
+        "exitTo": "00010003"
+      }
+    ]
+  },
+  {
+    "_id": {
+      "zoneId": "0001",
+      "roomId": "0001"
+    },
+    "title": "SecondRoom",
+    "description": "This is a special test room number two.",
+    "exits": [
+      {
+        "direction": "EAST",
+        "exitTo": "00010002"
+      },
+      {
+        "direction": "SOUTH",
+        "exitTo": "00010000"
+      }
+    ]
+  },
+  {
+    "_id": {
+      "zoneId": "0001",
+      "roomId": "0002"
+    },
+    "title": "ThirdRoom",
+    "description": "This is a special test room number three.",
+    "exits": [
+      {
+        "direction": "WEST",
+        "exitTo": "00010001"
+      }
+    ]
+  },
+  {
+    "_id": {
+      "zoneId": "0001",
+      "roomId": "0003"
+    },
+    "title": "FourRoom",
+    "description": "This is a special test room number four.",
+    "exits": [
+      {
+        "direction": "NORTH",
+        "exitTo": "00010004"
+      },
+      {
+        "direction": "EAST",
+        "exitTo": "00010000"
+      },
+      {
+        "direction": "SOUTH",
+        "exitTo": "00010005"
+      }
+    ]
+  },
+  {
+    "_id": {
+      "zoneId": "0001",
+      "roomId": "0004"
+    },
+    "title": "FiveRoom",
+    "description": "This is a special test room number five.",
+    "exits": [
+      {
+        "direction": "SOUTH",
+        "exitTo": "00010003"
+      }
+    ]
+  },
+  {
+    "_id": {
+      "zoneId": "0001",
+      "roomId": "0005"
+    },
+    "title": "SixRoom",
+    "description": "This is a special test room number six.",
+    "exits": [
+      {
+        "direction": "NORTH",
+        "exitTo": "00010003"
+      },
+      {
+        "direction": "EAST",
+        "exitTo": "00010006"
+      }
+    ]
+  },
+  {
+    "_id": {
+      "zoneId": "0001",
+      "roomId": "0006"
+    },
+    "title": "SevenRoom",
+    "description": "This is a special test room number seven.",
+    "exits": [
+      {
+        "direction": "WEST",
+        "exitTo": "00010005"
+      },
+      {
+        "direction": "EAST",
+        "exitTo": "00010007"
+      }
+    ]
+  },
+  {
+    "_id": {
+      "zoneId": "0001",
+      "roomId": "0007"
+    },
+    "title": "EightRoom",
+    "description": "This is a special test room number eight.",
+    "exits": [
+      {
+        "direction": "WEST",
+        "exitTo": "00010006"
+      }
+    ]
+  }
+]

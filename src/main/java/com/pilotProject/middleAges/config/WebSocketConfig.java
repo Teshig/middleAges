@@ -1,4 +1,4 @@
-package com.pilotProject.middleAges.onfig;
+package com.pilotProject.middleAges.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;

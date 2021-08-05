@@ -1,6 +1,8 @@
-package com.pilotProject.middleAges.engine.commands;
+package com.pilotProject.middleAges.engine.commands.commandset;
 
-import com.pilotProject.middleAges.engine.entity.CommandResult;
+import com.pilotProject.middleAges.engine.MessageKeys;
+import com.pilotProject.middleAges.engine.commands.CommandResponse;
+import com.pilotProject.middleAges.engine.commands.ICommand;
 import com.pilotProject.middleAges.engine.entity.ExitDirection;
 import com.pilotProject.middleAges.engine.world.World;
 import com.pilotProject.middleAges.engine.world.WorldState;
@@ -13,36 +15,18 @@ public class MovementCommand implements ICommand {
   }
 
   @Override
-  public CommandResponse execute(World world, String[] commandTokens) {
-    WorldState response = world.movePlayerTo("firstPerson", direction);
-    String direction;
-    String message;
-    switch ("name") {
-      case "север":
-        direction = "NORTH";
-        message = "вы поплелись на север!";
-        break;
-      case "восток":
-        direction = "EAST";
-        message = "вы поплелись на восток!";
-        break;
-      case "юг":
-        direction = "SOUTH";
-        message = "вы поплелись на юг!";
-        break;
-      case "запад":
-        direction = "WEST";
-        message = "вы поплелись на запад!";
-        break;
-      default:
-        direction = "";
-        message = "Вы не можее туда пройти!";
-        break;
+  public CommandResponse execute(String personId, World world, String[] commandTokens) {
+    WorldState worldResponse = world.movePlayerTo(personId, direction);
+    CommandResponse commandResponse = new CommandResponse();
+
+    if (worldResponse.isSuccess()) {
+      commandResponse.setKeyForDisplaying(MessageKeys.ACTION_MOVEMENT + direction.toString());
+    } else {
+      commandResponse.setKeyForDisplaying(MessageKeys.ACTION_FAILED_MOVE.toString());
     }
-//    CommandResult response = world.movePlayerTo("firstPerson", direction);
-//    if (!response.isSuccess()) {
-//      message = "Вы не можее туда пройти!";
-//    }
-    return null;
+
+    commandResponse.setRoomState(worldResponse.getRoomState());
+    commandResponse.setPersonState(worldResponse.getPlayerState());
+    return commandResponse;
   }
 }

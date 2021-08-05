@@ -7,11 +7,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
 @Document(collection = "zone_001")
-public class Room {
+public class RoomEntity {
   @Id
   private RoomId id;
 
   private String title;
   private String description;
-  private Map<ExitDirection, ExitDescription> exits;
+  private Map<ExitDirectionEntity, ExitDescriptionEntity> exits;
 }

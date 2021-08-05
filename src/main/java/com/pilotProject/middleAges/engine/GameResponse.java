@@ -1,11 +1,12 @@
-package com.pilotProject.middleAges.engine.entity;
+package com.pilotProject.middleAges.engine;
 
+import com.pilotProject.middleAges.engine.entity.Person;
+import com.pilotProject.middleAges.engine.entity.Room;
 import lombok.Data;
 
 @Data
-public class CommandResult {
-  private boolean success;
+public class GameResponse {
   private String message;
-  private String playerState;
+  private Person personState;
   private Room roomState;
 }
