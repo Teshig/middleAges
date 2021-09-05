@@ -1,12 +1,12 @@
 package com.pilotProject.middleAges.engine.world;
 
-import com.pilotProject.middleAges.engine.entity.Person;
-import com.pilotProject.middleAges.engine.entity.Room;
+import com.pilotProject.middleAges.engine.model.Person;
+import com.pilotProject.middleAges.engine.model.Room;
 import lombok.Data;
 
 @Data
 public class WorldState {
-  private boolean success;
-  private Person playerState;
-  private Room roomState;
+  private final boolean success;
+  private final Person playerState;
+  private final Room roomState;
 }

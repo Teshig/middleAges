@@ -1,9 +1,9 @@
 package com.pilotProject.middleAges.engine.world;
 
-import com.pilotProject.middleAges.engine.entity.ExitDescription;
-import com.pilotProject.middleAges.engine.entity.ExitDirection;
-import com.pilotProject.middleAges.engine.entity.Person;
-import com.pilotProject.middleAges.engine.entity.Room;
+import com.pilotProject.middleAges.engine.model.ExitDescription;
+import com.pilotProject.middleAges.engine.model.ExitDirection;
+import com.pilotProject.middleAges.engine.model.Person;
+import com.pilotProject.middleAges.engine.model.Room;
 import java.util.Map;
 
 public class World {
@@ -17,6 +17,15 @@ public class World {
     this.players = players;
   }
 
+  public WorldState enterTheWorld(Person person) {
+    players.put(person.getId(), person);
+
+    String currentRoomId = person.getCurrentLocation();
+    Room currentRoom = rooms.get(currentRoomId);
+
+    return worldState(true, person, currentRoom);
+  }
+
   public WorldState movePlayerTo(
       String personId,
       ExitDirection direction) {
@@ -26,13 +35,9 @@ public class World {
     Room currentRoom = rooms.get(currentRoomId);
     Map<ExitDirection, ExitDescription> exits = currentRoom.getExits();
 
-    WorldState response = new WorldState();
     ExitDescription exit = exits.get(direction);
     if (exit == null) {
-      response.setRoomState(currentRoom);
-      response.setPlayerState(person);
-      response.setSuccess(false);
-      return response;
+      return worldState(false, person, currentRoom);
     }
 
     String nextRoomId = exit.getExitTo();
@@ -42,9 +47,10 @@ public class World {
     nextRoom.addPerson(personId, person);
     person.setCurrentLocation(nextRoomId);
 
-    response.setRoomState(nextRoom);
-    response.setPlayerState(person);
-    response.setSuccess(true);
-    return response;
+    return worldState(true, person, nextRoom);
+  }
+
+  private WorldState worldState(boolean success, Person playerState, Room roomState) {
+    return new WorldState(success, playerState, roomState);
   }
 }

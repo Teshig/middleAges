@@ -1,4 +1,5 @@
-var stompClient = null;
+let stompClient = null;
+let playerId = null;
 
 function setConnected(connected) {
   $("#connect").prop("disabled", connected);
@@ -18,13 +19,45 @@ function buildMessage(body) {
   ${body.roomState ? body.roomState.description : ""}`;
 }
 
-function connect() {
-  var socket = new SockJS('/gs-guide-websocket');
+function loginRequest() {
+  const name = $("#nameI");
+  const pass = $("#pass");
+  if (name && pass) {
+    const data = {
+      name: name.val(),
+      password: pass.val()
+    }
+    fetch("http://localhost:8088/login", {
+      headers : {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      method: "POST",
+      body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+      playerId = data.id;
+      connect(data.id);
+    });
+  }
+}
+
+function connect(playerId) {
+  var socket = new SockJS('/middle-ages');
   stompClient = Stomp.over(socket);
   stompClient.connect({}, function (frame) {
     setConnected(true);
     console.log('Connected: ' + frame);
     stompClient.subscribe('/topic/greetings', function (gameStateResponse) {
+      const messageToBeDisplayed = buildMessage(JSON.parse(gameStateResponse.body));
+      showGreeting(messageToBeDisplayed);
+    });
+    stompClient.subscribe('/topic/personal-channel', function (gameStateResponse) {
+      const messageToBeDisplayed = buildMessage(JSON.parse(gameStateResponse.body));
+      showGreeting(messageToBeDisplayed);
+    });
+    stompClient.subscribe('/personal-channel/' + playerId, function (gameStateResponse) {
       const messageToBeDisplayed = buildMessage(JSON.parse(gameStateResponse.body));
       showGreeting(messageToBeDisplayed);
     });
@@ -40,7 +73,7 @@ function disconnect() {
 }
 
 function sendName() {
-  stompClient.send("/app/hello", {}, JSON.stringify({'command': $("#name").val()}));
+  stompClient.send("/app/command", {}, JSON.stringify({'playerId': playerId,'command': $("#name").val()}));
   $("#name").val('');
   $("#name").focus();
 }

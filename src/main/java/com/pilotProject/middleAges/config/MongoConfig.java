@@ -1,14 +1,14 @@
 package com.pilotProject.middleAges.config;
 
-import com.pilotProject.middleAges.mongo.convertor.RoomReadConverter;
+import com.pilotProject.middleAges.in.jpa.mongo.convertor.RoomReadConverter;
+import com.pilotProject.middleAges.in.jpa.mongo.repository.RoomJpaRepository;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.config.AbstractMongoClientConfiguration;
-import org.springframework.data.mongodb.core.convert.MongoCustomConversions;
 import org.springframework.data.mongodb.core.convert.MongoCustomConversions.MongoConverterConfigurationAdapter;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 @Configuration
-@EnableMongoRepositories("com.pilotProject.middleAges.mongo.repository")
+//@EnableMongoRepositories(basePackageClasses = RoomJpaRepository.class)
 public class MongoConfig extends AbstractMongoClientConfiguration {
 
 
@@ -21,5 +21,4 @@ public class MongoConfig extends AbstractMongoClientConfiguration {
   protected String getDatabaseName() {
     return "middleAges";
   }
-
 }

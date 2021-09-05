@@ -1,7 +1,7 @@
 package com.pilotProject.middleAges.controllers;
 
-import com.pilotProject.middleAges.engine.entity.Person;
-import com.pilotProject.middleAges.engine.entity.Room;
+import com.pilotProject.middleAges.engine.model.Person;
+import com.pilotProject.middleAges.engine.model.Room;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
