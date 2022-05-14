@@ -1,0 +1,42 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="
+  http://www.liquibase.org/xml/ns/dbchangelog
+  http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
+
+  <changeSet author="Vyacheslav" id="2021-11-14--00-initial-schema-creation-00">
+    <preConditions onFail="MARK_RAN">
+      <not>
+        <tableExists tableName="players"/>
+      </not>
+    </preConditions>
+    <createTable tableName="players">
+      <column name="id" type="SERIAL">
+        <constraints primaryKey="true"/>
+      </column>
+      <column name="name" type="CHAR(33)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="secret" type="VARCHAR(256)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="initial_location" type="VARCHAR(8)">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+  </changeSet>
+
+  <changeSet author="Vyacheslav" id="2021-11-14--00-initial-schema-creation-01">
+    <preConditions onFail="MARK_RAN">
+      <sqlCheck expectedResult="0">
+        SELECT COUNT(*) FROM players WHERE name='Bob';
+      </sqlCheck>
+    </preConditions>
+    <insert tableName="players">
+      <column name="name" value="Bob"/>
+      <column name="secret" value="123"/>
+      <column name="initial_location" value="00010000"/>
+    </insert>
+  </changeSet>
+
+</databaseChangeLog>

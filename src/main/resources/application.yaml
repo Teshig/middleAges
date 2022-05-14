@@ -1,4 +1,35 @@
+# --------------------------------------------
+# Server Configuration
+# --------------------------------------------
 server:
   port: 8088
   servlet:
     context-path: /
+
+# --------------------------------------------
+# Log Configuration
+# --------------------------------------------
+logging:
+  level:
+    root: info
+
+# --------------------------------------------
+# Profile Configuration
+# --------------------------------------------
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    properties:
+      hibernate:
+        temp:
+          use_jdbc_metadata_defaults: false
+  datasource:
+    url: jdbc:postgresql://localhost:5432/middleAges
+    username: postgres
+    password: admin
+  liquibase:
+    change-log: classpath:/db/changelog/changeLogMaster.xml
+    enabled: true
